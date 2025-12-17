@@ -1,13 +1,24 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
+import os
 
-DB_USERNAME = "postgres"
-DB_PASSWORD = "Abi%402007-5"
-DB_HOSTNAME = "localhost"
-DATABASE = "screenfree"
-DB_PORT = "5432"
 
-DATABASE_URL = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOSTNAME}:{DB_PORT}/{DATABASE}"
+load_dotenv()
+
+
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOSTNAME = os.getenv("DB_HOSTNAME")
+DB_PORT = os.getenv("DB_PORT")
+DATABASE = os.getenv("DATABASE")
+
+
+DATABASE_URL = (
+    f"postgresql+psycopg2://{DB_USERNAME}:{DB_PASSWORD}"
+    f"@{DB_HOSTNAME}:{DB_PORT}/{DATABASE}"
+)
+
 
 engine = create_engine(DATABASE_URL)
 
@@ -18,4 +29,3 @@ SessionLocal = sessionmaker(
 )
 
 Base = declarative_base()
-
