@@ -1,5 +1,2 @@
-.env/
-env/
-myenv/
-env\
 .env
+fastapi/
